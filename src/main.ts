@@ -1,5 +1,5 @@
-import { SearchController } from './app/searchController';
-import { renderState, type RenderHandles } from './ui/renderState';
+import { SearchController } from './app/searchController.js';
+import { renderState, type RenderHandles } from './ui/renderState.js';
 
 const root = document.createElement('main');
 const header = document.createElement('h1');

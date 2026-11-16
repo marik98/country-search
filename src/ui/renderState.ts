@@ -1,7 +1,7 @@
-import type { AppState } from '../app/state';
-import type { Country } from '../types';
-import { createCountryCard } from './countryCard';
-import { openDetail } from './detailView';
+import type { AppState } from '../app/state.js';
+import type { Country } from '../types.js';
+import { createCountryCard } from './countryCard.js';
+import { openDetail } from './detailView.js';
 
 export interface RenderHandles {
   status: HTMLElement;

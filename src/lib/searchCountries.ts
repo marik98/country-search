@@ -1,5 +1,5 @@
-import { HttpError } from './errors';
-import type { RawCountry } from '../types';
+import { HttpError } from './errors.js';
+import type { RawCountry } from '../types.js';
 
 const BASE_URL = 'https://countries.dev/name';
 

@@ -1,4 +1,4 @@
-import type { Country, RawCountry } from '../types';
+import type { Country, RawCountry } from '../types.js';
 
 export function mapCountryResponse(raw: RawCountry): Country {
   const result: Country = {

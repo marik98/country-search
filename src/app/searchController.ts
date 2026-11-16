@@ -1,8 +1,8 @@
-import { debounce } from '../lib/debounce';
-import { searchCountries } from '../lib/searchCountries';
-import { mapCountryResponse } from '../lib/mapCountryResponse';
-import { classifyError } from '../lib/classifyError';
-import type { AppState } from './state';
+import { debounce } from '../lib/debounce.js';
+import { searchCountries } from '../lib/searchCountries.js';
+import { mapCountryResponse } from '../lib/mapCountryResponse.js';
+import { classifyError } from '../lib/classifyError.js';
+import type { AppState } from './state.js';
 
 const DEFAULT_DEBOUNCE_MS = 400;
 const DEFAULT_TIMEOUT_MS = 8000;
