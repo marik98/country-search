@@ -46,7 +46,9 @@ function makeAbortAwareFetch(records: Map<string, Pending>) {
   });
 }
 
-const flush = () => new Promise<void>((r) => setTimeout(r, 0));
+const flush = async () => {
+  await vi.advanceTimersByTimeAsync(0);
+};
 
 describe('SearchController race handling', () => {
   beforeEach(() => vi.useFakeTimers());
@@ -63,7 +65,7 @@ describe('SearchController race handling', () => {
 
     // 'sp' typed → debounce fires → fetch('sp') starts
     controller.setQuery('sp');
-    vi.advanceTimersByTime(400);
+    await vi.advanceTimersByTimeAsync(400);
     await flush();
     const spPending = [...pending.values()][0]!;
     expect(spPending.url).toContain('/sp');
@@ -78,7 +80,7 @@ describe('SearchController race handling', () => {
     });
 
     // debounce for 'spain' fires → second fetch starts
-    vi.advanceTimersByTime(400);
+    await vi.advanceTimersByTimeAsync(400);
     await flush();
     expect(pending.size).toBe(2);
 
@@ -86,7 +88,7 @@ describe('SearchController race handling', () => {
     pending.get([...pending.keys()][1]!)!.resolve();
     await flush();
 
-    vi.advanceTimersByTime(2000);
+    await vi.advanceTimersByTimeAsync(2000);
     await flush();
 
     const last = states[states.length - 1]!;
@@ -106,12 +108,12 @@ describe('SearchController race handling', () => {
     controller.subscribe((s) => states.push(s));
 
     controller.setQuery('a');
-    vi.advanceTimersByTime(100);
+    await vi.advanceTimersByTimeAsync(100);
     await flush();
     controller.setQuery('ab'); // abort in-flight 'a'
-    vi.advanceTimersByTime(100);
+    await vi.advanceTimersByTimeAsync(100);
     await flush();
-    vi.advanceTimersByTime(500);
+    await vi.advanceTimersByTimeAsync(500);
     await flush();
 
     expect(states.some((s) => s.status === 'error')).toBe(false);
